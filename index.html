@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Veteran Family Support - Companion app for Canadian military families supporting veterans with mental health" />
+    <meta name="keywords" content="veteran families, military families, mental health support, Canadian veterans, crisis support" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://family-support.vetsupport.ca" />
+    <meta property="og:title" content="Veteran Family Support - Canadian Military Family Platform" />
+    <meta property="og:description" content="Supporting families of Canadian Armed Forces veterans with real-time monitoring, crisis alerts, and comprehensive resources." />
+    <meta property="og:image" content="/family-support-preview.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://family-support.vetsupport.ca" />
+    <meta property="twitter:title" content="Veteran Family Support - Canadian Military Family Platform" />
+    <meta property="twitter:description" content="Supporting families of Canadian Armed Forces veterans with real-time monitoring, crisis alerts, and comprehensive resources." />
+    <meta property="twitter:image" content="/family-support-preview.png" />
+
+    <!-- Canadian specific -->
+    <meta name="geo.region" content="CA" />
+    <meta name="geo.placename" content="Canada" />
+    <meta name="language" content="en-CA,fr-CA" />
+    
+    <!-- Security -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: https:;
+      connect-src 'self' https://*.supabase.co https://*.vercel.app https://api.yourecosystem.com;
+      frame-src 'none';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+    " />
+    
+    <title>Veteran Family Support - Supporting Canadian Military Families</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
