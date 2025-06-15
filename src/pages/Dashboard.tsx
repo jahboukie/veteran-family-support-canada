@@ -49,7 +49,7 @@ export default function Dashboard() {
   const quickActions: QuickActionCard[] = [
     {
       title: 'Check Veteran Status',
-      description: 'View your veteran\\'s current wellbeing and recent activity',
+      description: 'View your veteran\'s current wellbeing and recent activity',
       icon: HeartIcon,
       action: () => window.location.href = '/veteran-status',
       color: 'bg-blue-500',
