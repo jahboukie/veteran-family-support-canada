@@ -3,10 +3,13 @@ import { User, Session } from '@supabase/supabase-js'
 import toast from 'react-hot-toast'
 
 // Mock Supabase for development
+let authStateCallback: any = null
+
 const mockSupabase = {
   auth: {
     getSession: () => Promise.resolve({ data: { session: null } }),
     onAuthStateChange: (callback: any) => {
+      authStateCallback = callback
       return { data: { subscription: { unsubscribe: () => {} } } }
     },
     signInWithPassword: ({ email, password }: any) => {
@@ -20,12 +23,28 @@ const mockSupabase = {
             connected_veteran: 'veteran-demo-456'
           }
         }
-        return Promise.resolve({ data: { user: mockUser, session: { user: mockUser } }, error: null })
+        const mockSession = { user: mockUser, access_token: 'mock-token' }
+
+        // Trigger auth state change
+        setTimeout(() => {
+          if (authStateCallback) {
+            authStateCallback('SIGNED_IN', mockSession)
+          }
+        }, 100)
+
+        return Promise.resolve({ data: { user: mockUser, session: mockSession }, error: null })
       }
       return Promise.resolve({ data: null, error: { message: 'Invalid credentials' } })
     },
     signUp: () => Promise.resolve({ data: null, error: null }),
-    signOut: () => Promise.resolve({ error: null }),
+    signOut: () => {
+      setTimeout(() => {
+        if (authStateCallback) {
+          authStateCallback('SIGNED_OUT', null)
+        }
+      }, 100)
+      return Promise.resolve({ error: null })
+    },
     resetPasswordForEmail: () => Promise.resolve({ error: null })
   }
 }
@@ -110,6 +129,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signIn = async (email: string, password: string) => {
     try {
       setLoading(true)
+
       const { data, error } = await mockSupabase.auth.signInWithPassword({
         email,
         password,

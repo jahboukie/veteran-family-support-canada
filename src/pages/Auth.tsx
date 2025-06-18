@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import toast from 'react-hot-toast'
 
@@ -13,16 +14,17 @@ export default function Auth() {
     lastName: '',
     relationship: 'spouse'
   })
-  
+
   const { signIn, signUp, loading } = useAuth()
+  const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     try {
       if (isLogin) {
         await signIn(formData.email, formData.password)
-        window.location.href = '/dashboard'
+        navigate('/dashboard')
       } else {
         await signUp(formData.email, formData.password, {
           first_name: formData.firstName,

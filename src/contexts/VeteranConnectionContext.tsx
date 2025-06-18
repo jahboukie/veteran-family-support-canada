@@ -84,17 +84,22 @@ export function VeteranConnectionProvider({ children }: { children: React.ReactN
 
   const checkConnectionHealth = async () => {
     try {
-      const response = await axios.get('/api/ecosystem/health', {
-        timeout: 5000
-      })
-      
-      if (response.status === 200) {
+      // Mock connection health for demo - in production this would check the veteran's app
+      console.log('🔗 Checking veteran connection health...')
+
+      // Simulate connection check
+      const isConnected = Math.random() > 0.2 // 80% chance of being connected
+
+      if (isConnected) {
         setConnectionHealth('connected')
+        console.log('✅ Veteran connection: Connected')
       } else {
         setConnectionHealth('limited')
+        console.log('⚠️ Veteran connection: Limited')
       }
     } catch (error) {
       setConnectionHealth('offline')
+      console.log('❌ Veteran connection: Offline')
     }
   }
 
